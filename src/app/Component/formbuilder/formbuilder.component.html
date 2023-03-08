@@ -1,0 +1,31 @@
+<h1>Contact Form</h1>
+<form [formGroup]="contactform">
+    <div class="form-group">
+        <label>Username</label>
+        <input formControlName="userName" type="text" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input formControlName="password" type="password" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input formControlName="confirmPassword" type="password" class="form-control"/>
+    </div>
+
+    <div formGroupName = "address">
+        <div class="form-group">
+            <label>city</label>
+            <input type="text" formControlName="city" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>state</label>
+            <input type="text" formControlName="state" class="form-control"/>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+    <button class="btn btn-primary" (click)="loadapi()" type="submit">Load api</button>
+    <button class="btn btn-primary" (click)="loadapihalfdata()" type="submit">Load api using patch</button>
+
+{{contactform.value | json}}
+</form>

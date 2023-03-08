@@ -1,0 +1,49 @@
+<h1>Form Validation</h1>
+<form [formGroup]="contactform">
+    <div class="form-group">
+        <label>Username</label>
+        <input [class.is-invalid]="contactform.get('userName')?.invalid
+        && contactform.get('userName')?.touched"
+         formControlName="userName" type="text" class="form-control"/>
+        <!-- <small [class.d-none]="contactform.get('userName')?.valid || 
+        contactform.get('userName')?.untouched"
+        class="text-danger">Username is required</small> -->
+        <div *ngIf="userName?.invalid && userName?.touched">
+            <small *ngIf="getvalue(userName)">Username is required</small>
+            <small *ngIf="getminlength(userName)">Username must be greater than 3</small>
+            <small *ngIf="getcustomValidation(userName)">{{getcustomValidation(userName)}} not allowed</small>
+
+        </div>
+    </div>
+    <div formArrayName="alternateEmail" *ngFor="let email of alternateEmails.controls; let i=index">
+        
+        <input type="text" class="form-control" formControlName={{i}}>
+    </div>
+    <button type="button" class="btn btn-secondary" (click)="addAlternateEmails()">click me enter email</button>
+    
+    <div class="form-group">
+        <label>Password</label>
+        <input formControlName="password" type="password" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input formControlName="confirmPassword" [class.is-invalid]="contactform.errors?.['mismatch']" type="password" class="form-control"/>
+        <small *ngIf="contactform.errors?.['mismatch']">Password do not match </small>
+    </div>
+
+    <div formGroupName = "address">
+        <div class="form-group">
+            <label>city</label>
+            <input type="text" formControlName="city" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>state</label>
+            <input type="text" formControlName="state" class="form-control"/>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+    <!-- <button class="btn btn-primary" (click)="loadapi()" type="submit">Load api</button> -->
+    <button class="btn btn-primary" (click)="loadapihalfdata()" type="submit">Load api using patch</button>
+
+    {{contactform.value | json}}
+</form>

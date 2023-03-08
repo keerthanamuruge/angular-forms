@@ -1,0 +1,13 @@
+<p>form-validation works!</p>
+
+<form #frominpt="ngForm">
+    {{frominpt.value| json}}
+    <div>
+      <label>Email</label>
+      <input name="email"   class="form-control" ngModel>
+    </div>
+    <div>
+        <label>Phone number</label>
+        <input name="pro" type="email" class="form-control" ngModel>
+    </div>
+  </form>
